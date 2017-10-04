@@ -1,0 +1,72 @@
+<resources>
+    <style name="MyTheme" parent="Theme.AppCompat.Light">
+        <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
+
+        <!-- color for widget theming, eg EditText. Doesn't effect ActionBar. -->
+        <item name="colorControlNormal">@color/colorWHITE</item>
+        <!-- The animated arrow style -->
+    </style>
+
+    <style name="MyApp.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- THIS is where you can color the arrow! -->
+        <item name="colorControlNormal">@color/colorWHITE</item>
+    </style>
+
+    <style name="MyApp.ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="elevation">0dp</item>
+        <!-- style for actionBar title -->
+
+
+        <!--
+        the actionBarTheme doesn't use the colorControlNormal attribute
+        <item name="colorControlNormal">@color/my_awesome_color</item>
+         -->
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/colorWHITE</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/colorWHITE</item>
+        <item name="colorControlNormal">@color/colorWHITE</item>
+        <item name="colorControlActivated">@color/colorWHITE</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="AppTheme.PopupOverlay" />
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#d20d0d</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">8dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+        <item name="tabSelectedTextColor">#ffffff</item>
+    </style>
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
+    <style name="AppTheme.EditText">
+        <item name="colorControlNormal">@color/colorWHITE</item>
+        <item name="colorControlActivated">@color/colorWHITE</item>
+        <item name="backgroundTint">@color/colorWHITE</item>
+    </style>
+</resources>

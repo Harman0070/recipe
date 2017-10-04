@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ingredient_layout"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/dishNumber"
+        android:layout_width="41dp"
+        android:text="hi"
+        android:paddingLeft="8dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/dishIngredient"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="hi"
+        android:paddingLeft="8dp"
+        android:layout_marginLeft="4dp"/>
+    <TextView
+        android:id="@+id/dishAmount"
+        android:layout_width="112dp"
+        android:text="hi"
+        android:paddingLeft="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"/>
+</LinearLayout>

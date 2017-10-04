@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dip"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="#fa824b"
+    android:clickable="true"
+    android:id="@+id/search1"
+    >
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SHOW YOUR TALENT"
+        android:textSize="30dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:id="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/countryName"
+            android:singleLine="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#fa824b"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Country"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorWHITE"
+            android:textColorHint="@color/colorWHITE" />
+        <Spinner
+            android:background="@drawable/custom_spinner_background"
+            android:spinnerMode="dropdown"
+            android:id="@+id/spinnerCustom1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Do not find your Country?"/>
+        <TextView
+            android:id="@+id/countrybt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Click Here To Add Your Country"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2px"
+            android:background="#fff" />
+
+        <TextView
+            android:id="@+id/categoryName"
+            android:singleLine="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#fa824b"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Category"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorWHITE"
+            android:textColorHint="@color/colorWHITE" />
+        <Spinner
+            android:background="@drawable/custom_spinner_background"
+            android:spinnerMode="dropdown"
+            android:id="@+id/spinnerCustom2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Do not find your Category?"/>
+        <TextView
+            android:id="@+id/categorybt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Click Here To Add Your Category"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2px"
+            android:background="#fff" />
+
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorWHITE"
+        app:srcCompat="@android:drawable/ic_menu_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"/>
+</FrameLayout>
