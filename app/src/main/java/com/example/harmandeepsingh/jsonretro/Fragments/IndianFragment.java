@@ -67,8 +67,9 @@ public class IndianFragment extends Fragment {
         View v1= inflater.inflate(R.layout.fragment_indian, container, false);
        // Toast.makeText(getActivity(), "Indian: "+v1, Toast.LENGTH_SHORT).show();
         initialize(v1);
+
         // Set title bar
-        ((MainActivity) getActivity()).setActionBarTitle("Indian Recipes");
+
         return v1;
     }
     private void initialize(View v1){
@@ -127,6 +128,7 @@ public class IndianFragment extends Fragment {
         pDialog.setMessage("fetching data...");
         pDialog.setCancelable(false);
         cat_id = "1";
+
         showpDialog();
         //check internet state
         if (!checkInternetState.getInstance(getActivity()).isOnline()) {
@@ -154,6 +156,7 @@ public class IndianFragment extends Fragment {
                                recipe.setCategoryParrentId(response.body().getRecipetypename().get(i).getCategoryParrentId());
                                recipe.setRecipeImage(response.body().getRecipetypename().get(i).getRecipeImage());
                                Log.d("DataImage",""+response.body().getRecipetypename().get(i).getRecipeImage());
+                                ((MainActivity) getActivity()).setActionBarTitle(response.body().getRecipetypename().get(i).getCountryName()+" Recipes");
                                dishList1.add(recipe);
                             }
                             adapter1.notifyDataSetChanged();

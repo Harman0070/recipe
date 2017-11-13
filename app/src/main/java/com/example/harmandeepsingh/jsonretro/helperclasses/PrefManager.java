@@ -20,6 +20,7 @@ public class PrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("email",email);
         editor.putString("userid", userid);
+        editor.putBoolean("alreadyloggedin",true);
         editor.commit();
 
     }

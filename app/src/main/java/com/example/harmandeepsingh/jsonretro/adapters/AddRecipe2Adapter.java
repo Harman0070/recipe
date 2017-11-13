@@ -61,8 +61,8 @@ public class AddRecipe2Adapter extends RecyclerView.Adapter<AddRecipe2Adapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-         CategoryRecipesCardItems=dishListingre.get(position);
-
+        CategoryRecipesCardItems = new IngredientDatum();
+        CategoryRecipesCardItems = dishListingre.get(position);
         holder.dishingre.setText(CategoryRecipesCardItems.getIngDetail());
         holder.dishamt.setText(CategoryRecipesCardItems.getIngAmt());
 
@@ -70,7 +70,9 @@ public class AddRecipe2Adapter extends RecyclerView.Adapter<AddRecipe2Adapter.My
             @Override
             public void onClick(View view) {
                // String id=CategoryRecipesCardItems.getIngId();
-                alertdialog(CategoryRecipesCardItems.getIngId(),position);
+                alertdialog(dishListingre.get(position).getIngId());
+               // Log.d("positioncard"," "+position);
+                Log.d("idcard"," "+dishListingre.get(position).getIngId());
                // dishListingre.remove(position);
                 //notifyDataSetChanged();
             }
@@ -81,7 +83,7 @@ public class AddRecipe2Adapter extends RecyclerView.Adapter<AddRecipe2Adapter.My
     public int getItemCount() {
         return dishListingre.size();
     }
-    public void alertdialog(final String id,final int position) {
+    public void alertdialog(final String id) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
         dialogBuilder.setTitle("Delete");
         dialogBuilder.setMessage("Are you Sure?");
@@ -90,8 +92,8 @@ public class AddRecipe2Adapter extends RecyclerView.Adapter<AddRecipe2Adapter.My
             public void onClick(DialogInterface dialog, int whichButton) {
                 //do something with edt.getText().toString();
 
-                 deletefromDatabase(id,position);
-                Log.d("idcard:",""+id);
+                 deletefromDatabase(id);
+                Log.d("idcardDelete:",""+id);
 
               //  hidepDialog();
                 //deletefromDatabase();
@@ -108,7 +110,7 @@ public class AddRecipe2Adapter extends RecyclerView.Adapter<AddRecipe2Adapter.My
         b.show();
     }
 
-    public void deletefromDatabase(String id, final int position){
+    public void deletefromDatabase(String id){
         pDialog=new ProgressDialog(mContext);
         pDialog.setMessage("fetching data...");
         pDialog.setCancelable(false);
@@ -136,7 +138,8 @@ Log.d("deleteid:",""+id);
                             //dishListingre.remove(position);
                             Toast.makeText(mContext, "Deleted", Toast.LENGTH_SHORT).show();
                             Toast.makeText(mContext, "Swipe To Refresh", Toast.LENGTH_SHORT).show();
-                            dishListingre.remove(position);
+
+                           // dishListingre.remove(position);
 
                             /* for (int i = 0; i < response.body().getIngredientData().size(); i++) {
                                 //response.body().getIngredientData().get(i).getIngId();

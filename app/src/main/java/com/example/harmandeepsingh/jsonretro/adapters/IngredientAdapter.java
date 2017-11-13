@@ -29,7 +29,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.My
             super(view);
 
             dishingre = (TextView) view.findViewById(R.id.dishIngredient);
-            dishnum=(TextView)view.findViewById(R.id.dishNumber);
+           // dishnum=(TextView)view.findViewById(R.id.dishNumber);
             dishamt=(TextView)view.findViewById(R.id.dishAmount);
         }
     }
@@ -50,7 +50,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.My
         IngredientDatum CategoryRecipesCardItems=dishListingre.get(position);
 
             holder.dishingre.setText(CategoryRecipesCardItems.getIngDetail());
-            holder.dishnum.setText(CategoryRecipesCardItems.getIngId());
+          //  holder.dishnum.setText(CategoryRecipesCardItems.getIngId());
             holder.dishamt.setText(CategoryRecipesCardItems.getIngAmt());
     }
     @Override

@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +41,7 @@ import retrofit2.Response;
 
 public class Search1 extends Fragment {
     TextView txt1,txt2;
-    String categoryid;
+    public String categoryid;
     Spinner spinnerCustom1,spinnerCustom2;
     ProgressDialog pDialog;
     FloatingActionButton fab;
@@ -54,6 +56,9 @@ public class Search1 extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.add_fragment_search1, container, false);
+        final Toolbar myToolbar = (Toolbar)v. findViewById(R.id.search1Toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         txt1 = (TextView) v.findViewById(R.id.countrybt);
         txt2 = (TextView) v.findViewById(R.id.categorybt);
@@ -71,9 +76,6 @@ public class Search1 extends Fragment {
                                        int position, long id) {
                 // On selecting a spinner item
                 String item = parent.getItemAtPosition(position).toString();
-               // Toast.makeText(parent.getContext(),countryList.get(position).getCountryType(), Toast.LENGTH_LONG).show();
-              //  countryid=countryList.get(position).getCountryType();
-
                 preparecategory(countryList.get(position).getCountryType());
             }
 
@@ -96,9 +98,6 @@ public class Search1 extends Fragment {
                 // On selecting a spinner item
                 String item = parent.getItemAtPosition(position).toString();
                 categoryid=categoryList.get(position).getCategoryId();
-                // Showing selected spinner item
-              // Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-
             }
 
             @Override
@@ -113,7 +112,13 @@ public class Search1 extends Fragment {
                 FragmentTransaction ft = fm.beginTransaction();
                 Search2 llf = new Search2();
                 ft.replace(R.id.search1, llf);
-                ft.addToBackStack(null);
+                //fm.popBackStack();
+                 // or 'getSupportFragmentManager();'
+                int count = fm.getBackStackEntryCount();
+                for(int i = 0; i < count; ++i) {
+                    fm.popBackStack();
+                }
+               // ft.addToBackStack(null);
                 ft.commit();
             }
         });
@@ -126,16 +131,6 @@ public class Search1 extends Fragment {
                 ft.replace(R.id.search1, llf);
                 ft.addToBackStack(null);
                 ft.commit();
-              /*  final CountryName notice = countryList.get(getId());
-                String countryname=notice.getCountryName();
-                //String dishName =notice.getPrecipeName();
-                //String dishCategory = notice.getPrecipeImage();
-
-                Intent intent1=  new Intent(getActivity(),AddRecipe1.class);
-                intent1.putExtra("CountryName",countryname);
-                // intent.putExtra("dishName",dishName);
-                //intent.putExtra("dishCategory",dishCategory);
-                startActivity(intent1);*/
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -144,22 +139,17 @@ public class Search1 extends Fragment {
                 //Toast.makeText(getActivity(), "Fab", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle(R.string.app_name);
-                builder.setMessage("Are you Sure?");
                 // builder.setIcon(R.drawable.ic_launcher);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                       /* SpinnerCategoryName model=new SpinnerCategoryName();
-                        String categoryid=model.getCategoryId()*/;
                         Intent i=new Intent(getActivity(), AddRecipe1.class);
                         i.putExtra("cat_id",categoryid);
-                        Log.d("categoryid",""+categoryid);
-                        Toast.makeText(getActivity(), "categoryid"+categoryid, Toast.LENGTH_SHORT).show();
-                       startActivity(i);
+                        startActivity(i);
                     }
                 });
 
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                     }

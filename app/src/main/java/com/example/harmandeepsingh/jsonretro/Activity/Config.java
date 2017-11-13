@@ -7,12 +7,6 @@ package com.example.harmandeepsingh.jsonretro.Activity;
 public class Config {
 
         public static final String DEVELOPER_KEY = "AIzaSyDG2DL47Lr1kgSMDKEcIQeqY9CnwYJTycE";
-
-
-
-
-
-
         // YouTube video id
         public static final String YOUTUBE_VIDEO_CODE = "QAbQgLGKd3Y";
         public static final String YOUTUBE_VIDEO_CODE1 = "HRPpQw0dzko";

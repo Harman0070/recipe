@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.harmandeepsingh.jsonretro.AddActivity.SearchContainerActivity;
 import com.example.harmandeepsingh.jsonretro.Fragments.IndianFragment;
+import com.example.harmandeepsingh.jsonretro.Fragments.My_Recipes_Fragment;
 import com.example.harmandeepsingh.jsonretro.Fragments.NewestFragment;
 import com.example.harmandeepsingh.jsonretro.Interface.APIService;
 import com.example.harmandeepsingh.jsonretro.Interface.ApiClient;
@@ -72,9 +73,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         int color = Color.rgb(45,153,247);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
         m = navigationView.getMenu();
         preparecountry(m);
+      /*  MenuItem nav_camara = m.findItem(R.id.nav_newest);
+        nav_camara.setTitle("New Recipes");*/
+        navigationView.setNavigationItemSelectedListener(this);
 
        // m.add(0, 0, 0, "SriLankan");
        // m.add(0, 1, 0, "American");
@@ -169,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+
         return true;
     }
 
@@ -181,6 +185,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent=new Intent(MainActivity.this,Settings.class);
+            startActivity(intent);
             return true;
         }
 
@@ -218,7 +224,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_newest:
-                fragment = new NewestFragment();
+               fragment = new NewestFragment();
+                break;
+
+           case R.id.nav_myrecipes:
+                fragment = new My_Recipes_Fragment();
                 break;
         }
         //replacing the fragment
@@ -230,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
+
     /*
     public void loadHomeFragment() {
         // selecting appropriate nav menu item

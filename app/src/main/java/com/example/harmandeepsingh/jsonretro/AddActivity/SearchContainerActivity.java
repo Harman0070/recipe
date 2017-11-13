@@ -29,8 +29,7 @@ public class SearchContainerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_container);
-        setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Search1 llf = new Search1();
@@ -48,8 +47,8 @@ public class SearchContainerActivity extends AppCompatActivity {
 //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
 // finish the activity
-           onBackPressed();
-           // popBackStack();
+          // onBackPressed();
+            popBackStack();
             return true;
         }
 

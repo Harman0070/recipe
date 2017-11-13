@@ -26,14 +26,16 @@
         android:id="@+id/amounttTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Amount"
+        android:text="Quantity"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/addAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="text"
+        android:hint="2 1/2 cups choc chips(one per line)"
+        android:textSize="14sp"
         android:singleLine="true">
         <requestFocus />
 

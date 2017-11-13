@@ -3,10 +3,12 @@ package com.example.harmandeepsingh.jsonretro.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView signupText;
     Button loginBt;
     LinearLayout loginLayout;
+    CheckBox show_hide_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,19 @@ public class LoginActivity extends AppCompatActivity {
         loginBt=(Button) findViewById(R.id.loginbt);
         signupText=(TextView)findViewById(R.id.signupText);
         loginLayout = (LinearLayout) findViewById(R.id.login_layout);
+        show_hide_password=(CheckBox)findViewById(R.id.show_hide_password);
 
+        show_hide_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               /* passwordEdt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                passwordEdt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                passwordEdt.setSelection(passwordEdt.length());
+*/
+                passwordEdt.setTransformationMethod(new PasswordTransformationMethod());
+                passwordEdt.setTransformationMethod(null);
+            }
+        });
         loginBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                 String Password = passwordEdt.getText().toString();
                 if(validate(Email,Password)) {
                     loginUser(Email,Password);
-                    //Toast.makeText(LoginActivity.this, "Hiii", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -112,18 +126,15 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
 
-                    //if (response.isSuccessful()) {
-                        if (response.body().getSuccess().equals("1")) {
+                    if (response.body().getSuccess().equals("1")) {
                             saveLoginDetailsUser(response.body().getEmail(),response.body().getUserid() );
-
-                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                        finish();
-                        startActivity(i);
+                            Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            finish();
+                            startActivity(i);
                     }else{
                             Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-
                 }
 
                 @Override
@@ -136,6 +147,15 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void saveLoginDetailsUser(String email, String userid) {
         new PrefManager(this).saveLoginDetails(email , userid);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+        System.exit(0);
     }
 }
 

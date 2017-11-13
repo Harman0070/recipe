@@ -14,6 +14,9 @@ public class NewestModel {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("offset")
+    @Expose
+    private Integer offset;
     @SerializedName("NewestRecipeName")
     @Expose
     private List<NewestRecipeName> newestRecipeName = null;
@@ -52,6 +55,14 @@ public class NewestModel {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 
     public List<NewestRecipeName> getNewestRecipeName() {

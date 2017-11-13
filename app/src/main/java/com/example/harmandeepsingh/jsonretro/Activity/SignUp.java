@@ -113,14 +113,4 @@ public class SignUp extends AppCompatActivity {
             });
         }
     }
-   /* private String getParentLoginDetails(){
-        return new PrefManager(SignUp.this).getParentLoginDetails();
-    }
-    private String sharedKey()
-    {
-        return new PrefManager(SignUp.this).getParentKey();
-    }
-    private int sharedId() {
-        return new PrefManager(SignUp.this).getParentId();
-    }*/
 }

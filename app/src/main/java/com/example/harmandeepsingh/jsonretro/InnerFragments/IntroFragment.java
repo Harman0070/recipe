@@ -2,12 +2,19 @@ package com.example.harmandeepsingh.jsonretro.InnerFragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -16,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.harmandeepsingh.jsonretro.Interface.APIService;
 import com.example.harmandeepsingh.jsonretro.Interface.ApiClient;
 import com.example.harmandeepsingh.jsonretro.R;
+import com.example.harmandeepsingh.jsonretro.helperclasses.MyBounceInterpolator;
 import com.example.harmandeepsingh.jsonretro.helperclasses.PrefManager;
 import com.example.harmandeepsingh.jsonretro.helperclasses.checkInternetState;
 import com.example.harmandeepsingh.jsonretro.models.LikeModel;
@@ -27,6 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.harmandeepsingh.jsonretro.R.id.backdrop;
+import static com.example.harmandeepsingh.jsonretro.helperclasses.Utils.webUrl;
 
 /**
  * Created by Harmandeep singh on 9/6/2017.
@@ -37,8 +46,11 @@ TextView dishdetail,time,servings,likes;
    ImageView image1;
     ToggleButton ToggleButton;
     ProgressDialog pDialog;
+    public RatingBar ratingBar;
     private int count;
     Boolean success;
+    CoordinatorLayout mCoordinatorLayout;
+    CollapsingToolbarLayout collapsingToolbar;
 
     public IntroFragment() {
         // Required empty public constructor
@@ -74,7 +86,9 @@ TextView dishdetail,time,servings,likes;
                        ToggleButton.setChecked(response.body().getSuccess());
                        //Toast.makeText(getActivity(), ""+response.body().getSuccess(), Toast.LENGTH_SHORT).show();
                        Log.e("DAta",""+response.body().getSuccess());
-                       //likes.setText(""+response.body().getTotalikes());
+                       likes.setText(""+response.body().getTotalikes());
+
+                       Log.d("Total Likes",""+response.body().getTotalikes());
                    }else{
                        Toast.makeText(getContext(), "not success", Toast.LENGTH_SHORT).show();
                    }
@@ -88,31 +102,55 @@ TextView dishdetail,time,servings,likes;
         }
    }
 
-    void initialize(View v){
+    void initialize(final View v){
+        final Toolbar myToolbar = (Toolbar)v. findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        collapsingToolbar=(CollapsingToolbarLayout)v.findViewById(R.id.collapsingToolbar1);
+        mCoordinatorLayout = (CoordinatorLayout)v.findViewById(R.id.coordinatorLayout1);
+        collapsingToolbar.setTitleEnabled(true);
+     //   ratingBar = (RatingBar) v.findViewById(R.id.ratingBar);
         image1=(ImageView)v.findViewById(backdrop);
         dishdetail=(TextView)v.findViewById(R.id.dishDetail);
         time=(TextView)v.findViewById(R.id.time);
         servings=(TextView)v.findViewById(R.id.servings);
         likes=(TextView)v.findViewById(R.id.likes);
         ToggleButton=(ToggleButton)v.findViewById(R.id.tb);
+        final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+
         prepareintro();
 
         ToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("State",""+ToggleButton.isChecked());
+                ToggleButton.startAnimation(myAnim);
                 updatelikeindatabase(ToggleButton.isChecked());
+              //  initialize(v);
+                count();
                 //Toast.makeText(getActivity(), "Updating State... ", Toast.LENGTH_SHORT).show();
             }
         });
     }
+   /* public void didTapButton(View view) {
+        Button button = (Button)findViewById(R.id.button);
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        button.startAnimation(myAnim);
+    }*/
+   /*public void rateMe(View view){
 
+       Toast.makeText(getActivity(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_LONG).show();
+   }*/
     void prepareintro(){
         pDialog=new ProgressDialog(getContext());
         pDialog.setMessage("fetching data...");
         pDialog.setCancelable(false);
-        String str = getActivity().getIntent().getStringExtra("ID1");
-        //Log.d("Check:",""+str);
+       String str1 = getActivity().getIntent().getStringExtra("ID1");
+        //String str2 = getActivity().getIntent().getStringExtra("position");
+        Log.d("CheckintroparentID:",""+str1);
         showpDialog();
         //check internet state
         if (!checkInternetState.getInstance(getActivity()).isOnline()) {
@@ -120,7 +158,7 @@ TextView dishdetail,time,servings,likes;
             Toast.makeText(getActivity(), "Please Check Your Internet Connection.", Toast.LENGTH_LONG).show();
         }else {
             final APIService service = ApiClient.getClient().create(APIService.class);
-            Call<TimeModel> userCall = service.getpreptime(str);
+            Call<TimeModel> userCall = service.getpreptime(str1);
             userCall.enqueue(new Callback<TimeModel>() {
                 @Override
                 public void onResponse(Call<TimeModel> call, Response<TimeModel> response) {
@@ -128,9 +166,9 @@ TextView dishdetail,time,servings,likes;
 
                     if (response.isSuccessful()){
                         if (response.body().getSuccess()) {
-                           String image=response.body().getTimedetails().getPrecipeImage();
+                           String image=webUrl+response.body().getTimedetails().getPrecipeImage();
                             Glide.with(getActivity()).load(image).into(image1);
-
+                            collapsingToolbar.setTitle(response.body().getTimedetails().getPrecipeName());
                             dishdetail.setText(response.body().getTimedetails().getPrecipeDetail());
                             time.setText(response.body().getTimedetails().getTime());
                             servings.setText(response.body().getTimedetails().getServings());

@@ -1,12 +1,13 @@
 package com.example.harmandeepsingh.jsonretro.InnerFragments;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,10 @@ public class IngredientsFragment extends Fragment {
         return v;
     }
   void initialize(View v){
+      final Toolbar myToolbar = (Toolbar)v. findViewById(R.id.ingtoolbar);
+      ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+      ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+getActivity().setTitle("Go To Recipes");
       dishlistingre=new ArrayList<>();
       adapteringre=new IngredientAdapter(getActivity(),dishlistingre);
       dt=(TextView)v.findViewById(R.id.dishDetail);
@@ -76,12 +81,16 @@ public class IngredientsFragment extends Fragment {
       pDialog.setMessage("fetching data...");
       pDialog.setCancelable(false);
       String str1 = getActivity().getIntent().getStringExtra("ID1");
-      String recipename = getActivity().getIntent().getStringExtra("recipename");
-      getActivity().setTitle(recipename);
-      getActivity().setTitleColor(Color.parseColor("#ffffff"));
-      Log.d("recipename",""+recipename);
+      Log.d("CheckingreparentID:",""+str1);
+      //String recipename = getActivity().getIntent().getStringExtra("recipename");
+      //getActivity().setTitle(recipename);
+      //getActivity().setTitleColor(Color.parseColor("#ffffff"));
+
+      //Log.d("recipename",""+recipename);
       //cat1_id = 7;
+
       showpDialog();
+
       //check internet state
       if (!checkInternetState.getInstance(getActivity()).isOnline()) {
           hidepDialog();
@@ -103,7 +112,7 @@ public class IngredientsFragment extends Fragment {
                          // Toast.makeText(getActivity(), "ResponseIng"+response.body().getSuccess(), Toast.LENGTH_SHORT).show();
                           //dt.setText(response.body().getDetail().getPrecipeDetail());
                           //dn.setText(response.body().getDetail().getPrecipeName());
-                          Log.d("Mydata",""+response.body().getDetail().getPrecipeDetail());
+                          Log.d("Mydata",""+response.body().getDetail()    .getPrecipeDetail());
                           Log.d("Mydata",""+response.body().getDetail().getPrecipeName());
 
                           for (int i = 0; i < response.body().getIngredientData().size(); i++) {

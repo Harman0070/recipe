@@ -39,6 +39,7 @@ public class IndianActivity extends AppCompatActivity {
         setContentView(R.layout.activity_indian);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(3);
         setSupportActionBar(toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);

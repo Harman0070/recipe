@@ -4,9 +4,11 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +64,10 @@ public class PrepareFragment extends Fragment {
 
     }
     void initialize(View rootView){
+       final Toolbar myToolbar = (Toolbar)rootView. findViewById(R.id.prepareToolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActivity().setTitle("Go To Recipes");
         stepList=new ArrayList<>();
         adapterprepare=new PrepareAdapter(getActivity(),stepList);
         recyclerView=(RecyclerView)rootView.findViewById(R.id.prepare_recycler_view);
@@ -70,38 +76,22 @@ public class PrepareFragment extends Fragment {
         //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterprepare);
-
-        //YoutubeView
-        YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.youtube_view, youTubePlayerFragment).commit();
-
-        youTubePlayerFragment.initialize(Config.DEVELOPER_KEY, new YouTubePlayer.OnInitializedListener() {
-
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer youTubePlayer, boolean b) {
-                if (!b) {
-                    YPlayer=youTubePlayer;
-                    //YPlayer.setFullscreen(true);
-                    YPlayer.loadVideo(You);
-                    YPlayer.play();
-                }
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
-                // TODO Auto-generated method stub
-
-            }
-        });
+        You="";
         preparesteps();
+        //YoutubeView
+
+
     }
+
+
+
     void preparesteps(){
         pDialog=new ProgressDialog(getContext());
         pDialog.setMessage("fetching data...");
         pDialog.setCancelable(false);
 
         String str = getActivity().getIntent().getStringExtra("ID1");
+        Log.d("CheckprepareparentID:",""+str);
         showpDialog();
         //check internet state
         if (!checkInternetState.getInstance(getActivity()).isOnline()) {
@@ -123,8 +113,8 @@ public class PrepareFragment extends Fragment {
                     Log.d("DAta",""+response);
                     if (response.isSuccessful()){
                         if (response.body().getSuccess()) {
-                            You=(response.body().getVideoID().getPrecipeVideoId());
-                            Log.d("Video ID"," "+response.body().getVideoID().getPrecipeVideoId());
+                            You = response.body().getVideoID().getPrecipeVideoId();
+                            Log.d("Video ID"," "+response.body().getVideoID().getPrecipeVideoId()+"      "+You);
                             for (int i = 0; i < response.body().getSteps().size(); i++) {
                                 Step recipe = new Step();
                                 recipe.setStepId(""+(i+1));
@@ -132,9 +122,12 @@ public class PrepareFragment extends Fragment {
                                 recipe.setStepDetail(response.body().getSteps().get(i).getStepDetail());
                                 Log.d("Step Id",""+response.body().getSteps().get(i).getStepId());
                                 stepList.add(recipe);
+
                             }
 
                             adapterprepare.notifyDataSetChanged();
+                            playYoutube(You);
+
                         }else{
                             Toast.makeText(getContext(), "Try Again", Toast.LENGTH_SHORT).show();
                         }
@@ -151,9 +144,33 @@ public class PrepareFragment extends Fragment {
             });
         }
         adapterprepare.notifyDataSetChanged();
+
     }
 
+    private void playYoutube(final String you) {
+        YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.youtube_view, youTubePlayerFragment).commit();
+        youTubePlayerFragment.initialize(Config.DEVELOPER_KEY, new YouTubePlayer.OnInitializedListener() {
 
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer youTubePlayer, boolean b) {
+                if (!b) {
+                    YPlayer=youTubePlayer;
+                    //YPlayer.setFullscreen(true);
+                    YPlayer.loadVideo(you);
+                   // Log.d("youid",""+you);
+                    YPlayer.play();
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+    }
 
     //to show progress dialog
     private void showpDialog() {

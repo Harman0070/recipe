@@ -11,9 +11,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
         <activity
             android:name=".Activity.SignUp"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -38,12 +35,22 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddActivity.AddRecipe1"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddActivity.AddRecipe2" />
+            android:theme="@style/AppThemeTest" />
         <activity
-            android:name=".AddActivity.SearchContainerActivity"
+            android:name=".AddActivity.AddRecipe2"
+            android:theme="@style/AppThemeTest" />
+        <activity android:name=".AddActivity.SearchContainerActivity" />
+        <activity
+            android:name=".AddActivity.AddRecipe3"
+            android:theme="@style/AppThemeTest" />
+        <activity
+            android:name=".Activity.Settings"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddActivity.AddRecipe3"></activity>
+        <activity android:name=".Activity.youtube_activity" />
+        <activity android:name=".Activity.SearchActivity"
+            android:theme="@style/AppThemeTest"/>
+        <activity android:name=".Activity.AboutUs"
+            android:theme="@style/AppThemeTest" />
     </application>
 
 </manifest>

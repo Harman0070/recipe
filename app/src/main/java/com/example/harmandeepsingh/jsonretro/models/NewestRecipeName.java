@@ -4,7 +4,7 @@ package com.example.harmandeepsingh.jsonretro.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class NewestRecipeName {
+public class NewestRecipeName extends NewestModel {
 
     @SerializedName("precipe_id")
     @Expose
@@ -24,10 +24,13 @@ public class NewestRecipeName {
     @SerializedName("precipe_video_id")
     @Expose
     private String precipeVideoId;
+    @SerializedName("user_id")
+    @Expose
+    private String userId;
 
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
     public NewestRecipeName() {
     }
@@ -98,5 +101,13 @@ public class NewestRecipeName {
     public void setPrecipeVideoId(String precipeVideoId) {
         this.precipeVideoId = precipeVideoId;
     }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
 
 }

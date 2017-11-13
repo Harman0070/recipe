@@ -3,25 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp"
-    android:background="#fa824b"
-    android:clickable="true">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:id="@+id/linearLayout"
-        android:layout_marginBottom="32dp">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="#fff"
-            android:textSize="32sp" />
-    </LinearLayout>
-
+    android:background="#ffffff"
+    android:clickable="true"
+    android:id="@+id/search2">
     <LinearLayout
         android:id="@+id/login_layout"
         android:layout_width="fill_parent"
@@ -29,72 +13,43 @@
         android:orientation="vertical"
         android:layout_marginTop="230dp"
         android:layout_above="@+id/signupText"
-
         android:layout_below="@+id/linearLayout">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/country_search2"
+            android:singleLine="true"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:gravity="center_vertical"
+            android:hint="Add Country"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:textColorHint="#000" />
+        <EditText
+            android:id="@+id/category_search2"
+            android:singleLine="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:gravity="center_vertical"
+            android:hint="Add Category"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="7dp"
-            >
-            <EditText
-                android:id="@+id/country_search2"
-                android:singleLine="true"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:background="#fa824b"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:hint="Add Country"
-                android:inputType="textEmailAddress"
-                android:padding="10dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorWHITE"
-                android:textColorHint="@color/colorWHITE" />
-        </android.support.design.widget.TextInputLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2px"
-            android:background="#fff" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="4dp"
-            >
-            <EditText
-                android:id="@+id/category_search2"
-                android:singleLine="true"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:hint="Add Category"
-                android:inputType="text"
-                android:padding="10dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorWHITE"
-                android:textColorHint="@color/colorWHITE"/>
-        </android.support.design.widget.TextInputLayout>
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2px"
-            android:background="#fff" />
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:textColorHint="#000" />
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:backgroundTint="#fa824b"
+        android:layout_margin="@dimen/fab_margin"
         android:layout_gravity="bottom|end"
-        app:backgroundTint="@color/colorWHITE"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:src="@drawable/next"
         android:clickable="true"/>
 </FrameLayout>

@@ -1,13 +1,12 @@
 package com.example.harmandeepsingh.jsonretro.Interface;
 
 
-import android.graphics.drawable.Drawable;
-
 import com.example.harmandeepsingh.jsonretro.models.AddcategoryModel;
 import com.example.harmandeepsingh.jsonretro.models.Addcountrysearch2Model;
 import com.example.harmandeepsingh.jsonretro.models.CountryrecipeModel;
 import com.example.harmandeepsingh.jsonretro.models.Ingre1Model;
 import com.example.harmandeepsingh.jsonretro.models.LikeModel;
+import com.example.harmandeepsingh.jsonretro.models.MyrecipesModel;
 import com.example.harmandeepsingh.jsonretro.models.NewestModel;
 import com.example.harmandeepsingh.jsonretro.models.Noofrowsmodel;
 import com.example.harmandeepsingh.jsonretro.models.RecipeModel;
@@ -17,10 +16,14 @@ import com.example.harmandeepsingh.jsonretro.models.SubjectsDetails;
 import com.example.harmandeepsingh.jsonretro.models.TimeModel;
 import com.example.harmandeepsingh.jsonretro.models.UserLogin;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 /**
  * Created by Harmandeep singh on 8/10/2017.
@@ -41,7 +44,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("particularrecipetbl.php")
-    Call<RecipePartModel> getparticularrecipes(@Field("pcategory_id") String parent_id);
+    Call<RecipePartModel> getparticularrecipes(@Field("pcategory_id") String parent_id,@Field("offset") int offset,@Field("limit") int limit);
 
     @FormUrlEncoded
     @POST("ingredients.php")
@@ -49,7 +52,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("addrecipe2_delete.php")
-    Call<Ingre1Model> getingredientid(@Field("ing_id") String precipe_id);
+    Call<Ingre1Model> getingredientid(@Field("ing_id") String id);
 
     @FormUrlEncoded
     @POST("steps.php")
@@ -61,7 +64,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("newesttbl.php")
-    Call<NewestModel> getnewestrecipeid(@Field(" ") String country_type);
+    Call<NewestModel> getnewestrecipeid(@Field("limit") int limit,@Field("offset") int offset);
 
     @FormUrlEncoded
     @POST("timetbl.php")
@@ -93,7 +96,12 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("addrecipe1.php")
-    Call<Addcountrysearch2Model> addData(@Field("precipe_parent_id") String cat_id,@Field("precipe_name") String getname,@Field("precipe_detail") String getdetail,@Field("precipe_video_id") String getvideoid,@Field("time") String gettime,@Field("servings") String getservings,@Field("precipe_image") Drawable imageview);
+    Call<Addcountrysearch2Model> addData(@Field("precipe_parent_id") String cat_id,@Field("user_id") String user_id,@Field("precipe_name") String getname,@Field("precipe_detail") String getdetail,@Field("precipe_video_id") String getvideoid,@Field("time") String gettime,@Field("servings") String getservings);
+
+    //fileToUpload,Ruser_id,RName,RDetail,RVideoID,RTime,RServing,RCatID
+    @Multipart
+    @POST("addrecipe1.php")
+    Call<Addcountrysearch2Model> uploadimage(@Part MultipartBody.Part file, @Part("user_id") RequestBody Ruserid, @Part("precipe_name") RequestBody RName, @Part("precipe_detail") RequestBody RDetail, @Part("precipe_video_id") RequestBody RVideoID, @Part("time") RequestBody RTime, @Part("servings") RequestBody RServing, @Part("precipe_parent_id") RequestBody RCatID);
 
     @FormUrlEncoded
     @POST("addrecipe2.php")
@@ -102,5 +110,13 @@ public interface APIService {
     @FormUrlEncoded
     @POST("addrecipe3.php")
     Call<Addcountrysearch2Model> addrecipe3data(@Field("step_parent_id") String step_parent_id,@Field("step_detail") String steps);
+
+    @FormUrlEncoded
+    @POST("myrecipes.php")
+    Call<MyrecipesModel> getmyrecipes(@Field("user_id") int user_id);
+
+    @FormUrlEncoded
+    @POST("search_recipe.php")
+    Call<NewestModel> searchrecipe(@Field("recipename") String recipename,@Field ("limit")int limit);
 }
 

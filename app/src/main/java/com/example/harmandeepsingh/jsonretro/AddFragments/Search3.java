@@ -2,9 +2,10 @@ package com.example.harmandeepsingh.jsonretro.AddFragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -16,7 +17,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.harmandeepsingh.jsonretro.AddActivity.AddRecipe1;
 import com.example.harmandeepsingh.jsonretro.Interface.APIService;
 import com.example.harmandeepsingh.jsonretro.Interface.ApiClient;
 import com.example.harmandeepsingh.jsonretro.R;
@@ -193,7 +193,15 @@ public class Search3 extends Fragment {
                     Toast.makeText(getActivity(), ""+response.body().getSuccess(), Toast.LENGTH_SHORT).show();
                     if (response.isSuccessful()) {
 
-                        startActivity(new Intent(getActivity(), AddRecipe1.class));
+                       // startActivity(new Intent(getActivity(), Search1.class));
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        Search1 llf = new Search1();
+                        ft.replace(R.id.search3, llf);
+                        int count = fm.getBackStackEntryCount();
+                        for(int i = 0; i < count; ++i) {
+                            fm.popBackStack();
+                        }
                         // Toast.makeText(getActivity(), "Fab2", Toast.LENGTH_SHORT).show();
                         Toast.makeText(getActivity(), "Added", Toast.LENGTH_SHORT).show();
 

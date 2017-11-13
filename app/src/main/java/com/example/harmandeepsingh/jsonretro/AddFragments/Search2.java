@@ -2,9 +2,10 @@ package com.example.harmandeepsingh.jsonretro.AddFragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.harmandeepsingh.jsonretro.AddActivity.AddRecipe1;
 import com.example.harmandeepsingh.jsonretro.Interface.APIService;
 import com.example.harmandeepsingh.jsonretro.Interface.ApiClient;
 import com.example.harmandeepsingh.jsonretro.R;
@@ -117,8 +117,18 @@ FloatingActionButton fab;
                         Toast.makeText(getActivity(), ""+response.body().getSuccess(), Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()) {
 
-                           startActivity(new Intent(getActivity(), AddRecipe1.class));
+                          // startActivity(new Intent(getActivity(), Search1.class));
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            Search1 llf = new Search1();
+                            ft.replace(R.id.search2, llf);
+                            int count = fm.getBackStackEntryCount();
+                            for(int i = 0; i < count; ++i) {
+                                fm.popBackStack();
+                            }
+                            //ft.addToBackStack(null);
 
+                            ft.commit();
                           /*Intent i = new Intent(getActivity(),AddRecipe1.class);
                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(i);

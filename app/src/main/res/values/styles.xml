@@ -1,4 +1,5 @@
 <resources>
+
     <style name="MyTheme" parent="Theme.AppCompat.Light">
         <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
 
@@ -10,6 +11,36 @@
     <style name="MyApp.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <!-- THIS is where you can color the arrow! -->
         <item name="colorControlNormal">@color/colorWHITE</item>
+    </style>
+
+    <style name="CustomShowcaseTheme2" parent="ShowcaseView">
+        <item name="sv_backgroundColor">#90000000</item>
+        <item name="sv_showcaseColor">#3271d4</item>
+        <item name="sv_buttonText">Close</item>
+        <item name="sv_titleTextAppearance">@style/CustomTitle2</item>
+        <item name="sv_detailTextAppearance">@style/CustomText2</item>
+    </style>
+
+    <style name="CustomTitle2" parent="TextAppearance.ShowcaseView.Title.Light">
+        <item name="android:textColor">#ff6a00</item>
+        <item name="android:textSize">26sp</item>
+
+    </style>
+
+
+    <style name="AppThemeTest" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="elevation">6dp</item>
+        <item name="titleTextColor">@android:color/white</item>
+    </style>
+
+    <style name="CustomText2" parent="TextAppearance.ShowcaseView.Detail.Light">
+        <item name="android:textColor">@color/colorWHITE</item>
+        <item name="android:textSize">20sp</item>
+
     </style>
 
     <style name="MyApp.ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar">
@@ -36,6 +67,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="TextLabel" parent="TextAppearance.AppCompat">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@color/colorWHITE</item>
@@ -59,14 +91,17 @@
         <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
         <item name="tabSelectedTextColor">#ffffff</item>
     </style>
+
     <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="textAllCaps">true</item>
     </style>
+
     <style name="AppTheme.EditText">
         <item name="colorControlNormal">@color/colorWHITE</item>
         <item name="colorControlActivated">@color/colorWHITE</item>
         <item name="backgroundTint">@color/colorWHITE</item>
     </style>
+
 </resources>
